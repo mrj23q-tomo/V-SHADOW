@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V SHADOW | AI & Web Software Development</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#00f2fe',
+                            blue: '#4facfe',
+                            dark: '#070b14',
+                            card: '#0d1527',
+                            border: '#1e293b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Orbitron"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #070b14;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+        }
+
+        .gradient-border {
+            position: relative;
+            background: #0d1527;
+            border-radius: 1rem;
+        }
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: 1.05rem;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0,242,254,0.4), rgba(79,172,254,0.1), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .glass-card {
+            background: rgba(13, 21, 39, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 242, 254, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(0, 242, 254, 0.15);
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
+        }
+
+        .cyber-grid {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="cyber-grid antialiased selection:bg-brand-cyan selection:text-black">
+
+    <nav class="fixed top-0 left-0 w-full z-50 glass-card border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center font-extrabold text-black text-xl shadow-lg shadow-cyan-500/30 group-hover:scale-105 transition-transform duration-300">
+                    VS
+                </div>
+                <div>
+                    <span class="font-display text-xl sm:text-2xl font-black tracking-wider block">V <span class="gradient-text">SHADOW</span></span>
+                    <span class="text-[10px] tracking-widest text-gray-400 uppercase font-semibold block -mt-1">AI Web Software</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide">
+                <a href="#home" class="hover:text-brand-cyan transition-colors py-1">Home</a>
+                <a href="#projects" class="hover:text-brand-cyan transition-colors py-1">Ongoing Projects</a>
+                <a href="#services" class="hover:text-brand-cyan transition-colors py-1">Services</a>
+                <a href="#team" class="hover:text-brand-cyan transition-colors py-1">Leadership</a>
+                <a href="#contact" class="hover:text-brand-cyan transition-colors py-1">Contact</a>
+            </div>
+
+            <!-- WhatsApp Direct Action Button -->
+            <div class="flex items-center space-x-3">
+                <a href="https://wa.me/918754600499" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center space-x-2 gradient-bg text-black font-bold text-xs sm:text-sm px-5 py-2.5 rounded-xl hover:opacity-90 transition shadow-lg shadow-cyan-500/20 hover:scale-105 transform duration-200">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Connect Now</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-2xl text-gray-300 hover:text-white p-2 focus:outline-none" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-gray-800 px-6 py-5 space-y-4">
+            <a href="#home" class="block text-gray-200 font-semibold hover:text-brand-cyan">Home</a>
+            <a href="#projects" class="block text-gray-200 font-semibold hover:text-brand-cyan">Ongoing Projects</a>
+            <a href="#services" class="block text-gray-200 font-semibold hover:text-brand-cyan">Services</a>
+            <a href="#team" class="block text-gray-200 font-semibold hover:text-brand-cyan">Leadership</a>
+            <a href="#contact" class="block text-gray-200 font-semibold hover:text-brand-cyan">Contact</a>
+            <a href="https://wa.me/918754600499" target="_blank" class="flex items-center justify-center space-x-2 gradient-bg text-black font-bold py-3 rounded-xl">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>WhatsApp Us</span>
+            </a>
+        </div>
+    </nav>
+
+    <section id="home" class="relative pt-36 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-brand-cyan text-xs sm:text-sm font-semibold mb-6">
+                <span class="flex h-2 w-2 relative">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                </span>
+                <span>V SHADOW AI WEB SOFTWARE DEVELOPMENT</span>
+            </div>
+
+            <h1 class="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-tight">
+                Architecting Next-Gen <br>
+                <span class="gradient-text">AI Systems & Software</span>
+            </h1>
+
+            <p class="text-gray-400 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed">
+                We craft intelligent Web Platforms, ERP Enterprise Solutions, Customized Billing Systems, HD UI/UX Visual Assets, and Automated AI Workflows built for maximum business expansion.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto">
+                <a href="#projects" class="gradient-bg text-black font-extrabold px-8 py-4 rounded-xl hover:opacity-90 transition shadow-xl shadow-cyan-500/25 flex items-center justify-center space-x-2">
+                    <span>Explore Live Projects</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="glass-card hover:border-brand-cyan text-white font-bold px-8 py-4 rounded-xl transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-headset"></i>
+                    <span>Contact Team</span>
+                </a>
+            </div>
+
+            <!-- Stats Highlight Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-16 pt-10 border-t border-slate-800/80">
+                <div class="p-4 glass-card rounded-xl">
+                    <div class="font-display text-2xl md:text-3xl font-extrabold gradient-text">3+</div>
+                    <div class="text-xs text-gray-400 font-medium mt-1">Live Active Deployments</div>
+                </div>
+                <div class="p-4 glass-card rounded-xl">
+                    <div class="font-display text-2xl md:text-3xl font-extrabold gradient-text">100%</div>
+                    <div class="text-xs text-gray-400 font-medium mt-1">Custom Architecture</div>
+                </div>
+                <div class="p-4 glass-card rounded-xl">
+                    <div class="font-display text-2xl md:text-3xl font-extrabold gradient-text">AI Ready</div>
+                    <div class="text-xs text-gray-400 font-medium mt-1">Smart Automation</div>
+                </div>
+                <div class="p-4 glass-card rounded-xl">
+                    <div class="font-display text-2xl md:text-3xl font-extrabold gradient-text">24/7</div>
+                    <div class="text-xs text-gray-400 font-medium mt-1">Dedicated Support</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ambient Lighting Glows -->
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+        <div class="absolute top-2/3 left-1/4 w-[300px] h-[300px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+    </section>
+
+    <section id="projects" class="py-20 relative bg-slate-950/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-block text-brand-cyan text-xs font-bold uppercase tracking-widest bg-cyan-950/80 px-4 py-1.5 rounded-full mb-3 border border-cyan-800/40">
+                    Active Deployments
+                </div>
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">
+                    Live Ongoing <span class="gradient-text">Projects</span>
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base">
+                    Real-world enterprise systems powered and actively maintained by V SHADOW AI WEB SOFTWARE DEVELOPMENT.
+                </p>
+            </div>
+
+            <!-- Project Cards Grid -->
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                
+                <!-- Project 1: GWC -->
+                <div class="gradient-border glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-slate-900 flex items-center justify-center p-6">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0d1527] to-transparent z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="GWC ERP Web Software" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-60">
+                            <span class="absolute top-4 left-4 z-20 px-3 py-1 bg-cyan-950/90 text-brand-cyan text-xs font-bold rounded-full border border-cyan-500/40 flex items-center space-x-1">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span>Live System</span>
+                            </span>
+                        </div>
+                        <div class="p-6 relative z-20">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-display text-xl font-bold text-white group-hover:text-brand-cyan transition-colors">GWC</h3>
+                                <i class="fa-solid fa-database text-brand-cyan text-lg"></i>
+                            </div>
+                            <p class="text-brand-cyan font-medium text-xs mb-3">ERP DATA ENTRY WEB SOFTWARE</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                                Enterprise-grade Data Entry and Resource Planning web portal designed for real-time record tracking, automated workflows, and fast input operations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 z-20">
+                        <a href="https://mrj23q-tomo.github.io/my-erp/" target="_blank" rel="noopener noreferrer" class="w-full gradient-bg text-black font-bold py-3 px-4 rounded-xl flex items-center justify-center space-x-2 text-sm hover:opacity-90 transition shadow-lg shadow-cyan-500/20">
+                            <span>Visit Live Demo</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: CITY ELECTRICALS -->
+                <div class="gradient-border glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-slate-900 flex items-center justify-center p-6">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0d1527] to-transparent z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="City Electricals Billing Software" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-60">
+                            <span class="absolute top-4 left-4 z-20 px-3 py-1 bg-cyan-950/90 text-brand-cyan text-xs font-bold rounded-full border border-cyan-500/40 flex items-center space-x-1">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span>In Active Use</span>
+                            </span>
+                        </div>
+                        <div class="p-6 relative z-20">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-display text-xl font-bold text-white group-hover:text-brand-cyan transition-colors">CITY ELECTRICALS</h3>
+                                <i class="fa-solid fa-file-invoice-dollar text-brand-cyan text-lg"></i>
+                            </div>
+                            <p class="text-brand-cyan font-medium text-xs mb-3">BILLING SOFTWARE SYSTEM</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                                Streamlined billing application tailored for fast GST-compliant receipt generation, transaction history, customer ledgering, and counter sales management.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 z-20">
+                        <div class="w-full bg-slate-800/80 border border-slate-700/60 text-gray-300 font-semibold py-3 px-4 rounded-xl flex items-center justify-center space-x-2 text-sm">
+                            <i class="fa-solid fa-lock text-brand-cyan text-xs"></i>
+                            <span>Internal Enterprise Software</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: SASTI MOBILES -->
+                <div class="gradient-border glass-card rounded-2xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-slate-900 flex items-center justify-center p-6">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#0d1527] to-transparent z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80" alt="Sasti Mobiles Inventory & Billing" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-60">
+                            <span class="absolute top-4 left-4 z-20 px-3 py-1 bg-cyan-950/90 text-brand-cyan text-xs font-bold rounded-full border border-cyan-500/40 flex items-center space-x-1">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span>In Active Use</span>
+                            </span>
+                        </div>
+                        <div class="p-6 relative z-20">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-display text-xl font-bold text-white group-hover:text-brand-cyan transition-colors">SASTI MOBILES</h3>
+                                <i class="fa-solid fa-boxes-stacked text-brand-cyan text-lg"></i>
+                            </div>
+                            <p class="text-brand-cyan font-medium text-xs mb-3">STOCK MAINTENANCE & BILLING ACCOUNTS</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                                All-in-one mobile retail software featuring real-time IMEI/stock inventory tracking, sales accounting, daily revenue reports, and billing systems.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 z-20">
+                        <div class="w-full bg-slate-800/80 border border-slate-700/60 text-gray-300 font-semibold py-3 px-4 rounded-xl flex items-center justify-center space-x-2 text-sm">
+                            <i class="fa-solid fa-lock text-brand-cyan text-xs"></i>
+                            <span>Internal Enterprise Software</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Portfolio Ready Announcement Banner -->
+            <div class="glass-card p-8 rounded-3xl border-2 border-dashed border-cyan-500/30 text-center relative overflow-hidden">
+                <div class="max-w-2xl mx-auto relative z-10">
+                    <div class="w-12 h-12 gradient-bg rounded-2xl flex items-center justify-center text-black text-xl mx-auto mb-4 font-bold shadow-lg shadow-cyan-500/30">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-2">Custom Software & Portfolio Ready To Build</h3>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed mb-6">
+                        Need a custom web app, ERP system, mobile shop software, or AI automation platform for your own business? We build scalable applications customized to your operational workflow.
+                    </p>
+                    <a href="https://wa.me/918754600499?text=Hi%20V%20SHADOW,%20I%20want%20to%20discuss%20a%20new%20software%20project." target="_blank" class="inline-flex items-center space-x-2 gradient-bg text-black font-extrabold px-6 py-3 rounded-xl hover:opacity-90 transition text-sm">
+                        <i class="fa-solid fa-rocket"></i>
+                        <span>Order Custom Software</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-block text-brand-cyan text-xs font-bold uppercase tracking-widest bg-cyan-950/80 px-4 py-1.5 rounded-full mb-3 border border-cyan-800/40">
+                    End-to-End Capabilities
+                </div>
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">
+                    Our Specialized <span class="gradient-text">Services</span>
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base">
+                    From complex back-end architectures to sleek frontend visual aesthetics and AI capabilities.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Service 1 -->
+                <div class="glass-card p-8 rounded-2xl relative group transition duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-700/80 flex items-center justify-center text-brand-cyan text-2xl mb-6 group-hover:scale-110 group-hover:border-cyan-400 transition duration-300 shadow-md">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3 group-hover:text-brand-cyan transition-colors">Web & Software Dev</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        Custom web software, ERP Data Entry systems, e-commerce applications, and high-performance SaaS tools tailored for business growth.
+                    </p>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-cyan"></i> <span>Custom ERP & Data Portals</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-cyan"></i> <span>Billing & Accounting Web Apps</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-card p-8 rounded-2xl relative group transition duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-700/80 flex items-center justify-center text-brand-cyan text-2xl mb-6 group-hover:scale-110 group-hover:border-cyan-400 transition duration-300 shadow-md">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3 group-hover:text-brand-cyan transition-colors">AI Integration</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        Integrating machine learning models, natural language automation, predictive analytics, and smart bot tools into existing platforms.
+                    </p>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-cyan"></i> <span>Automated Workflow Bots</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-cyan"></i> <span>AI Data Insights & Analytics</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card p-8 rounded-2xl relative group transition duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-700/80 flex items-center justify-center text-brand-cyan text-2xl mb-6 group-hover:scale-110 group-hover:border-cyan-400 transition duration-300 shadow-md">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3 group-hover:text-brand-cyan transition-colors">UI / UX Design</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        Intuitive, modern dark-mode & light-mode interfaces with user experience flows, dynamic prototypes, and wireframes.
+                    </p>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-cyan"></i> <span>Mobile-First Responsive Layouts</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-cyan"></i> <span>Interactive Web Prototypes</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-card p-8 rounded-2xl relative group transition duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-700/80 flex items-center justify-center text-brand-cyan text-2xl mb-6 group-hover:scale-110 group-hover:border-cyan-400 transition duration-300 shadow-md">
+                        <i class="fa-solid fa-icons"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3 group-hover:text-brand-cyan transition-colors">Icon & Visual Branding</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        Custom vector icon sets, corporate identity systems, logo styling, and branding guidelines for consistent visual presence.
+                    </p>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-cyan"></i> <span>Custom Vector Iconography</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-cyan"></i> <span>Brand Guidelines & Assets</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="glass-card p-8 rounded-2xl relative group transition duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-700/80 flex items-center justify-center text-brand-cyan text-2xl mb-6 group-hover:scale-110 group-hover:border-cyan-400 transition duration-300 shadow-md">
+                        <i class="fa-solid fa-photo-film"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3 group-hover:text-brand-cyan transition-colors">HD Visual Asset Styling</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        High-definition marketing visuals, render enhancements, promotional graphics, and image styling crafted for websites and apps.
+                    </p>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-cyan"></i> <span>HD Banner & Render Creation</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-cyan"></i> <span>Optimized Graphic Delivery</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="glass-card p-8 rounded-2xl relative group transition duration-300">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-700/80 flex items-center justify-center text-brand-cyan text-2xl mb-6 group-hover:scale-110 group-hover:border-cyan-400 transition duration-300 shadow-md">
+                        <i class="fa-solid fa-cloud-bolt"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3 group-hover:text-brand-cyan transition-colors">24/7 Hosting & Support</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        Cloud deployment, server security monitoring, routine backup management, and dedicated developer technical support.
+                    </p>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-cyan"></i> <span>Continuous Uptime Monitoring</span></li>
+                        <li class="flex items-center space-x-2"><i class="fa-solid fa-check text-brand-cyan"></i> <span>Instant Technical Assistance</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="py-20 bg-slate-950/60 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-block text-brand-cyan text-xs font-bold uppercase tracking-widest bg-cyan-950/80 px-4 py-1.5 rounded-full mb-3 border border-cyan-800/40">
+                    Core Executives
+                </div>
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">
+                    Leadership <span class="gradient-text">Team</span>
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base">
+                    Meet the visionary driving forces behind V SHADOW AI WEB SOFTWARE DEVELOPMENT.
+                </p>
+            </div>
+
+            <!-- Customized Leadership Grid with Unique Icon Styling -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Founder Card -->
+                <div class="glass-card p-6 rounded-2xl text-center relative group hover:border-cyan-400/60 transition duration-300 overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-amber-500/10 rounded-full blur-xl group-hover:bg-amber-500/20 transition"></div>
+                    <!-- Icon Avatar Badge -->
+                    <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-300 p-0.5 shadow-lg shadow-amber-500/20 mb-5 group-hover:scale-105 transition-transform">
+                        <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center text-amber-400 text-3xl">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                    </div>
+                    <span class="inline-block px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[11px] font-extrabold uppercase rounded-full mb-2">
+                        Founder
+                    </span>
+                    <h3 class="font-display text-xl font-bold text-white mb-1">M Sathish Kumar</h3>
+                    <p class="text-gray-400 text-xs">Visionary Founder & Strategy Director</p>
+                </div>
+
+                <!-- MD Card -->
+                <div class="glass-card p-6 rounded-2xl text-center relative group hover:border-cyan-400/60 transition duration-300 overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition"></div>
+                    <!-- Icon Avatar Badge -->
+                    <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 p-0.5 shadow-lg shadow-blue-500/20 mb-5 group-hover:scale-105 transition-transform">
+                        <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center text-brand-cyan text-3xl">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <span class="inline-block px-3 py-1 bg-cyan-500/10 text-brand-cyan border border-cyan-500/30 text-[11px] font-extrabold uppercase rounded-full mb-2">
+                        Managing Director (MD)
+                    </span>
+                    <h3 class="font-display text-xl font-bold text-white mb-1">Prakash Raja</h3>
+                    <p class="text-gray-400 text-xs">Enterprise Growth & Operations</p>
+                </div>
+
+                <!-- CEO Card -->
+                <div class="glass-card p-6 rounded-2xl text-center relative group hover:border-cyan-400/60 transition duration-300 overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl group-hover:bg-cyan-500/20 transition"></div>
+                    <!-- Icon Avatar Badge -->
+                    <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-cyan-400 to-indigo-500 p-0.5 shadow-lg shadow-cyan-500/20 mb-5 group-hover:scale-105 transition-transform">
+                        <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center text-cyan-300 text-3xl">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                    </div>
+                    <span class="inline-block px-3 py-1 bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 text-[11px] font-extrabold uppercase rounded-full mb-2">
+                        Chief Executive Officer
+                    </span>
+                    <h3 class="font-display text-xl font-bold text-white mb-1">Vicky</h3>
+                    <p class="text-gray-400 text-xs">CEO & Technology Architecture</p>
+                </div>
+
+                <!-- GM Card -->
+                <div class="glass-card p-6 rounded-2xl text-center relative group hover:border-cyan-400/60 transition duration-300 overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-purple-500/10 rounded-full blur-xl group-hover:bg-purple-500/20 transition"></div>
+                    <!-- Icon Avatar Badge -->
+                    <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-tr from-purple-500 to-pink-500 p-0.5 shadow-lg shadow-purple-500/20 mb-5 group-hover:scale-105 transition-transform">
+                        <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center text-purple-400 text-3xl">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                    </div>
+                    <span class="inline-block px-3 py-1 bg-purple-500/10 text-purple-300 border border-purple-500/30 text-[11px] font-extrabold uppercase rounded-full mb-2">
+                        General Manager (GM)
+                    </span>
+                    <h3 class="font-display text-xl font-bold text-white mb-1">Joe</h3>
+                    <p class="text-gray-400 text-xs">Client Relations & Delivery GM</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Left Details Column -->
+                <div>
+                    <div class="inline-block text-brand-cyan text-xs font-bold uppercase tracking-widest bg-cyan-950/80 px-4 py-1.5 rounded-full mb-3 border border-cyan-800/40">
+                        Get In Touch
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6">
+                        Let's Discuss Your <span class="gradient-text">Next Project</span>
+                    </h2>
+                    <p class="text-gray-400 text-base leading-relaxed mb-8">
+                        Whether you need an ERP portal, custom billing software, stock management solution, UI/UX graphic styling, or AI automation, our development team is ready to deliver.
+                    </p>
+
+                    <div class="space-y-6">
+                        <!-- Direct Call -->
+                        <div class="glass-card p-5 rounded-2xl flex items-center space-x-4 border border-slate-800">
+                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center text-black text-xl font-bold shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 font-medium">Direct Phone Contacts</p>
+                                <div class="flex flex-wrap gap-2 text-white font-bold text-base mt-1">
+                                    <a href="tel:8754600499" class="hover:text-brand-cyan transition">+91 87546 00499</a>
+                                    <span class="text-gray-600">|</span>
+                                    <a href="tel:9789713414" class="hover:text-brand-cyan transition">+91 97897 13414</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Email Contact -->
+                        <div class="glass-card p-5 rounded-2xl flex items-center space-x-4 border border-slate-800">
+                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center text-black text-xl font-bold shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 font-medium">Official HR Email</p>
+                                <a href="mailto:vshadowhr1@gmail.com" class="text-white font-bold text-base hover:text-brand-cyan transition block mt-1">
+                                    vshadowhr1@gmail.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp Action -->
+                        <a href="https://wa.me/918754600499" target="_blank" rel="noopener noreferrer" class="glass-card p-5 rounded-2xl flex items-center justify-between border border-emerald-500/30 hover:border-emerald-400 transition group">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center text-black text-xl font-bold shrink-0 shadow-lg shadow-emerald-500/20">
+                                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-emerald-400 font-bold uppercase tracking-wider">Fast Response</p>
+                                    <p class="text-white font-bold text-base group-hover:text-emerald-400 transition">Chat On WhatsApp Directly</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-gray-500 group-hover:text-emerald-400 transition transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Form Column -->
+                <div class="gradient-border glass-card p-8 rounded-3xl relative">
+                    <h3 class="font-display text-2xl font-bold mb-2">Send Us A Message</h3>
+                    <p class="text-gray-400 text-xs sm:text-sm mb-6">Fill in your information and our GM / CEO will respond shortly.</p>
+
+                    <form id="contact-form" class="space-y-5" onsubmit="handleFormSubmit(event)">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 mb-2 uppercase tracking-wider">Your Full Name</label>
+                            <input type="text" required id="user-name" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-brand-cyan text-sm transition" placeholder="e.g. Rahul Sharma">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 mb-2 uppercase tracking-wider">Phone / Mobile Number</label>
+                            <input type="tel" required id="user-phone" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-brand-cyan text-sm transition" placeholder="e.g. +91 98765 43210">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 mb-2 uppercase tracking-wider">Required Service</label>
+                            <select id="user-service" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-brand-cyan text-sm transition">
+                                <option value="ERP / Web Software">ERP / Data Entry Web Software</option>
+                                <option value="Billing Software">Billing & Accounting Software</option>
+                                <option value="Stock Maintenance">Stock & Mobile Store Software</option>
+                                <option value="UI/UX & Graphics">UI/UX & Icon Visual Assets</option>
+                                <option value="AI Integration">AI Integration & Automation</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 mb-2 uppercase tracking-wider">Project Scope / Details</label>
+                            <textarea id="user-msg" rows="4" required class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-white placeholder-gray-500 focus:outline-none focus:border-brand-cyan text-sm transition" placeholder="Tell us about your business requirements..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full gradient-bg text-black font-extrabold py-4 rounded-xl hover:opacity-90 transition shadow-lg shadow-cyan-500/20 flex items-center justify-center space-x-2 text-sm">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Send Inquiry</span>
+                        </button>
+                    </form>
+
+                    <div id="form-feedback" class="hidden mt-4 p-4 rounded-xl bg-cyan-950/90 border border-cyan-500/40 text-brand-cyan text-center text-xs font-semibold">
+                        Thank you! Your message has been sent successfully. We will get back to you shortly!
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 border-t border-slate-800/80 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center font-bold text-black text-sm">VS</div>
+                <span class="font-display font-bold text-sm tracking-wide">V SHADOW AI WEB SOFTWARE DEVELOPMENT</span>
+            </div>
+            <p class="text-gray-500 text-xs">
+                &copy; 2026 V SHADOW. All Rights Reserved. Built for AI & Enterprise Innovation.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Drawer Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close drawer on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Interactive Form Submission
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const feedback = document.getElementById('form-feedback');
+            const form = document.getElementById('contact-form');
+            
+            feedback.classList.remove('hidden');
+            form.reset();
+
+            setTimeout(() => {
+                feedback.classList.add('hidden');
+            }, 6000);
+        }
+    </script>
+</body>
+</html>
